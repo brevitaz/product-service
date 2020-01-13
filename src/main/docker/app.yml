@@ -1,0 +1,12 @@
+version: '2'
+services:
+    products:
+        image: products
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+        ports:
+            - 8082:8080
+networks:
+  default:
+    external:
+      name: brevitaz-microservices_default

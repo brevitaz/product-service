@@ -1,0 +1,3 @@
+memory, storage, capacity => ram
+case => cover
+gigabyte => gb

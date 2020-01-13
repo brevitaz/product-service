@@ -1,0 +1,102 @@
+buildscript {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		jcenter()
+		maven { url "http://repo.spring.io/plugins-release" }
+		maven { url "http://repo.spring.io/milestone" }
+		maven { url "https://plugins.gradle.org/m2/" }
+	}
+	dependencies {
+		classpath "net.ltgt.gradle:gradle-apt-plugin:0.9"
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${spring_boot_version}"
+		classpath "org.springframework.build.gradle:propdeps-plugin:0.0.7"
+		classpath "io.spring.gradle:dependency-management-plugin:1.0.7.RELEASE"
+	}
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.1.4.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+apply from: 'gradle/docker.gradle'
+
+defaultTasks 'bootRun'
+
+description = 'Product Service REST API'
+
+jar {
+	enabled = true
+}
+
+bootJar {
+	mainClassName = 'com.brevitaz.ProductApp'
+}
+
+springBoot {
+	mainClassName = 'com.brevitaz.ProductApp'
+}
+
+bootRun {
+	mainClassName = 'com.brevitaz.ProductApp'
+}
+
+applicationDefaultJvmArgs = [
+		"-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+]
+
+group = 'com.brevitaz'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+	jcenter()
+	maven { url 'http://repo.spring.io/milestone' }
+	maven { url 'http://repo.spring.io/snapshot' }
+	maven { url 'https://repository.jboss.org/nexus/content/repositories/releases' }
+	maven { url 'https://oss.sonatype.org/content/repositories/releases' }
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+	maven { url 'http://repo.maven.apache.org/maven2' }
+	maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.apache.commons:commons-lang3:3.8.1'
+	compile group: 'org.elasticsearch', name: 'elasticsearch', version: esClientVersion
+	compile (group: 'org.elasticsearch.client', name: 'transport', version: esClientVersion){
+		exclude module: 'transport-netty4-client'
+	}
+	compile group: 'org.elasticsearch.plugin', name: 'transport-netty4-client', version: '6.6.1'
+	compile ("io.springfox:springfox-swagger2:${springfox_version}") {
+		exclude module: 'mapstruct'
+	}
+	compile "io.springfox:springfox-bean-validators:${springfox_version}"
+	compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.3'
+	compile "org.apache.logging.log4j:log4j-core:2.11.1"
+	compile "org.apache.logging.log4j:log4j-api:2.11.1"
+	testImplementation group: 'org.apache.lucene', name: 'lucene-test-framework', version: '7.6.0'
+	testImplementation group: 'org.elasticsearch.test', name: 'framework', version: '6.6.1'
+	testImplementation ('org.springframework.boot:spring-boot-starter-test') {
+		exclude module: 'mockito-core'
+		exclude module: 'hamcrest-library'
+		exclude module: 'hamcrest-core'
+	}
+}
+
+configurations {
+	all*.exclude module: 'log4j-to-slf4j'
+	all*.exclude module: 'lucene-backward-codecs'
+	all*.exclude module: 'commons-logging'
+}

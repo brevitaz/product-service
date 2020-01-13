@@ -1,0 +1,67 @@
+{
+  "properties": {
+    "code": {
+      "type": "text",
+      "analyzer": "keyword_analyzer"
+    },
+    "reviewScore": {
+      "type": "long"
+    },
+    "author": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "ignore_above": 256,
+          "type": "keyword"
+        }
+      }
+    },
+    "specifications": {
+      "properties": {
+        "colour": {
+          "type": "text",
+          "analyzer": "custom_analyzer"
+        },
+        "model": {
+          "type": "text",
+          "analyzer": "custom_analyzer"
+        },
+        "storage": {
+          "type": "text",
+          "analyzer": "custom_analyzer"
+        },
+        "battery": {
+          "type": "text",
+          "analyzer": "custom_analyzer"
+        },
+        "camera": {
+          "type": "text",
+          "analyzer": "custom_analyzer"
+        },
+        "modelYear": {
+          "type": "long"
+        },
+        "brand": {
+          "type": "text",
+          "analyzer": "custom_analyzer"
+        }
+      }
+    },
+    "description": {
+      "type": "text",
+      "analyzer": "custom_analyzer"
+    },
+    "categories": {
+      "type": "text",
+      "analyzer": "keyword_analyzer"
+    },
+    "title": {
+      "type": "text",
+      "analyzer": "custom_analyzer"
+    },
+    "tags": {
+      "type": "text",
+      "analyzer": "keyword_analyzer"
+    }
+  }
+}

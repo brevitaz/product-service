@@ -1,6 +1,6 @@
 # Product Search
 
-Product service is an application that uses relevance search capability of Elasticsearch to search and list out products from database.  
+Product search is an application that uses relevance search capability of Elasticsearch to search and list out products from database.  
 
 ## Getting Started
 

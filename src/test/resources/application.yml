@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: Product search
+  profiles:
+    active: test
+  data:
+    elasticsearch:
+      cluster-nodes: localhost:9300
+      cluster-name: docker-cluster
+
+endpoints:
+  health:
+    sensitive: false
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+
+app:
+  elasticsearch:
+    cluster-name: docker-cluster
+    cluster-nodes: localhost:9300
+    index-name: products-test
+    type-name: _doc
+    templates:
+
+logging:
+  level:
+    com.brevitaz: ERROR

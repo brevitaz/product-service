@@ -1,0 +1,30 @@
+{
+  "analysis": {
+    "analyzer": {
+      "custom_analyzer": {
+        "tokenizer": "standard",
+        "filter": [
+          "lowercase",
+          "stemmer_filter",
+          "synonym_filter"
+        ]
+      },
+      "keyword_analyzer": {
+        "tokenizer": "keyword",
+        "filter": [
+          "lowercase"
+        ]
+      }
+    },
+    "filter": {
+      "stemmer_filter": {
+        "type": "stemmer",
+        "name": "light_english"
+      },
+      "synonym_filter": {
+        "type": "synonym",
+        "synonyms_path": "synonym.txt"
+      }
+    }
+  }
+}
